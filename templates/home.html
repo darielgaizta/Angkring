@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+		<title>Home</title>
+	</head>
+	<body>
+		<div class="container">
+			<section id="welcome-section">
+				<figure>
+					<img src="../static/assets/angkring.png" alt="picture of angkring">
+					<figcaption><strong>ANGKRING</strong></figcaption>
+				</figure>
+			</section>
+			<section id="entering-section">
+				<form method="POST" action="checkview">
+					{% csrf_token %}
+					<label for="angkringan"><strong>Angkringan</strong></label><br>
+					<input type="text" name="angkringan" id="angkringan" placeholder="Enter an angkringan"><br>
+					<label for="username"><strong>Username</strong></label><br>
+					<input type="text" name="username" id="username" placeholder="Enter your username"><br>
+					<input type="submit" name="submit" id="submit" value="Enter">
+				</form>
+			</section>
+		</div>
+	</body>
+</html>

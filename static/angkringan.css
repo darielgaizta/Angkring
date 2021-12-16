@@ -1,0 +1,52 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: monospace;
+	background-color: azure;
+}
+
+header {
+	text-align: center;
+}
+
+.container {
+	max-width: 960px;
+	margin: auto;
+}
+
+.chat {
+	border: 2px solid cadetblue;
+	border-radius: 3px;
+}
+
+.field {
+	background-color: whitesmoke;
+	padding: 20px 150px 20px 10px;
+}
+
+.bubble {
+	padding: 5px 15px;
+	color: white;
+	background-color: steelblue;
+}
+
+form {
+	display: flex;
+}
+
+form input {
+	padding: 0 30px;
+	background-color: lightsteelblue;
+}
+
+form input:hover {
+	background-color: steelblue;
+}
+
+@media (max-width: 960px) {
+	.field {
+		padding: 10px;
+	}
+}

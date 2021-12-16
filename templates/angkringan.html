@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'angkringan.css' %}">
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+		<script src="{% static 'script.js' %}"></script>
+		<title>Angkringan - {{angkringan_details.name}}</title>
+	</head>
+	<body>
+		<header>
+			<h1>{{angkringan}} - {{username}}</h1>
+		</header>
+		<main>
+			<div class="container">
+				<div class="chat field" id=bubble-wrap>
+					<!-- <div class="chat bubble">
+						<h3>John Doe</h3><hr>
+						<p>Hey, wassup??</p>
+						<p>at 2021-12-14 08:12:27</p>
+					</div><br>
+					<div class="chat bubble">
+						<h3>John Doe</h3><hr>
+						<p>Hey, wassup??</p>
+						<p>at 2021-12-14 08:12:27</p>
+					</div><br> -->
+				</div>
+				<form id="send-message">
+					{% csrf_token %}
+					<input type="hidden" name="username" id="username" value="{{username}}">
+					<input type="hidden" name="angkringan_id" id="angkringan_id" value="{{angkringan_details.id}}">
+					<textarea name="message" id="message" placeholder="Enter your message" cols="94"></textarea>
+					<input type="submit" value="Send">
+				</form>
+			</div>
+		</main>
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			setInterval(function(){
+				$.ajax({
+					type:'GET',
+					url : "/getMessages/{{angkringan}}/",
+					success:function(response){
+						console.log(response);
+						$("#bubble-wrap").empty();
+						for (var key in response.messages)
+						{
+							var temp = "<div class='chat bubble'><h3>"+response.messages[key].user+"</h3><hr><p>"+response.messages[key].text+"</p><p>"+response.messages[key].date+"</p></div><br>";
+							$("#bubble-wrap").append(temp);
+						}
+					},
+					error:function(response){
+						alert('Oops, something went wrong.');
+					}
+				});
+			}, 500);
+		});
+	</script>
+</html>
